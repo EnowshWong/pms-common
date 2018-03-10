@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/pms-portal" />
+    <file type="web" url="file://$PROJECT_DIR$/pms-stu" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pms-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/pms-common/pom.xml" />
+        <option value="$PROJECT_DIR$/pms-pojo/pom.xml" />
+        <option value="$PROJECT_DIR$/pms-mapper/pom.xml" />
+        <option value="$PROJECT_DIR$/pms-portal/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

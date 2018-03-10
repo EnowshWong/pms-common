@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="pms-common" />
+        <module name="pms-mapper" />
+        <module name="pms-pojo" />
+        <module name="pms-portal" />
+        <module name="pms-stu" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pms-common" target="1.7" />
+      <module name="pms-mapper" target="1.7" />
+      <module name="pms-parent" target="1.7" />
+      <module name="pms-pojo" target="1.7" />
+      <module name="pms-portal" target="1.7" />
+      <module name="pms-stu" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

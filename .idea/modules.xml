@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/pms-common/pms-common.iml" filepath="$PROJECT_DIR$/pms-common/pms-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pms-mapper/pms-mapper.iml" filepath="$PROJECT_DIR$/pms-mapper/pms-mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pms-parent/pms-parent.iml" filepath="$PROJECT_DIR$/pms-parent/pms-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pms-pojo/pms-pojo.iml" filepath="$PROJECT_DIR$/pms-pojo/pms-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pms-portal/pms-portal.iml" filepath="$PROJECT_DIR$/pms-portal/pms-portal.iml" />
+    </modules>
+  </component>
+</project>
