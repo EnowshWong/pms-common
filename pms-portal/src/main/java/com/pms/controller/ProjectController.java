@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pojo.EasyUIResult;
 import pojo.PmsResult;
 import utils.ExceptionUtil;
 
@@ -36,5 +38,30 @@ public class ProjectController {
         }catch (Exception e){
             return PmsResult.build(400,ExceptionUtil.getStackTrace(e));
         }
+    }
+
+    @RequestMapping("/project/list")
+    @ResponseBody
+    public EasyUIResult getProjectList(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int rows,long tutorId){
+        EasyUIResult easyUIResult = projectService.getProjectList(page, rows, tutorId);
+        return easyUIResult;
+    }
+
+    @RequestMapping("/project/update")
+    @ResponseBody
+    public PmsResult updateProject(PmsProject pmsProject){
+        try {
+            PmsResult pmsResult=projectService.updateProject(pmsProject);
+            return pmsResult;
+        }catch (Exception e){
+            return PmsResult.build(400,ExceptionUtil.getStackTrace(e));
+        }
+    }
+
+    @RequestMapping("/project/delete")
+    @ResponseBody
+    public PmsResult deleteProject(long id){
+        PmsResult pmsResult = projectService.deleteProject(id);
+        return pmsResult;
     }
 }
