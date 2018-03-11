@@ -15,16 +15,16 @@
         <property name="prefix" value="/WEB-INF/jsp/" />
         <!--<property name="suffix" value=".jsp" />-->
     </bean>
-    <!--配置拦截器-->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <!--被拦截的url-->
-            <mvc:mapping path="/plan/**"/>
-            <mvc:mapping path="/project/**"/>
-            <!--指定拦截器bean-->
-            <bean class="com.pms.interceptor.LoginInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--&lt;!&ndash;配置拦截器&ndash;&gt;-->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--&lt;!&ndash;被拦截的url&ndash;&gt;-->
+            <!--<mvc:mapping path="/plan/**"/>-->
+            <!--<mvc:mapping path="/project/**"/>-->
+            <!--&lt;!&ndash;指定拦截器bean&ndash;&gt;-->
+            <!--<bean class="com.pms.interceptor.LoginInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
     <!--&lt;!&ndash;配置静态资源映射器&ndash;&gt;-->
     <!--<mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>-->
     <!--<mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>-->

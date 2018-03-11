@@ -3,14 +3,14 @@
 <mapper namespace="com.pms.mapper.PmsProjectMapper" >
   <resultMap id="BaseResultMap" type="com.pms.pojo.PmsProject" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
     <result column="tutor_id" property="tutorId" jdbcType="BIGINT" />
     <result column="created" property="created" jdbcType="TIMESTAMP" />
     <result column="expired" property="expired" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.pms.pojo.PmsProject" extends="BaseResultMap" >
-    <result column="desc" property="desc" jdbcType="LONGVARCHAR" />
+    <result column="project_desc" property="projectDesc" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,10 +71,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, tutor_id, created, expired, status
+    id, project_name, tutor_id, created, expired, status
   </sql>
   <sql id="Blob_Column_List" >
-    desc
+    project_desc
   </sql>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pms.pojo.PmsProjectExample" >
     select
@@ -125,12 +125,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.pms.pojo.PmsProject" >
-    insert into pms_project (id, name, tutor_id, 
+    insert into pms_project (id, project_name, tutor_id, 
       created, expired, status, 
-      desc)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{tutorId,jdbcType=BIGINT}, 
+      project_desc)
+    values (#{id,jdbcType=BIGINT}, #{projectName,jdbcType=VARCHAR}, #{tutorId,jdbcType=BIGINT}, 
       #{created,jdbcType=TIMESTAMP}, #{expired,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
-      #{desc,jdbcType=LONGVARCHAR})
+      #{projectDesc,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pms.pojo.PmsProject" >
     insert into pms_project
@@ -138,8 +138,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="projectName != null" >
+        project_name,
       </if>
       <if test="tutorId != null" >
         tutor_id,
@@ -153,16 +153,16 @@
       <if test="status != null" >
         status,
       </if>
-      <if test="desc != null" >
-        desc,
+      <if test="projectDesc != null" >
+        project_desc,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="projectName != null" >
+        #{projectName,jdbcType=VARCHAR},
       </if>
       <if test="tutorId != null" >
         #{tutorId,jdbcType=BIGINT},
@@ -176,8 +176,8 @@
       <if test="status != null" >
         #{status,jdbcType=TINYINT},
       </if>
-      <if test="desc != null" >
-        #{desc,jdbcType=LONGVARCHAR},
+      <if test="projectDesc != null" >
+        #{projectDesc,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -193,8 +193,8 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.projectName != null" >
+        project_name = #{record.projectName,jdbcType=VARCHAR},
       </if>
       <if test="record.tutorId != null" >
         tutor_id = #{record.tutorId,jdbcType=BIGINT},
@@ -208,8 +208,8 @@
       <if test="record.status != null" >
         status = #{record.status,jdbcType=TINYINT},
       </if>
-      <if test="record.desc != null" >
-        desc = #{record.desc,jdbcType=LONGVARCHAR},
+      <if test="record.projectDesc != null" >
+        project_desc = #{record.projectDesc,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -219,12 +219,12 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update pms_project
     set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
+      project_name = #{record.projectName,jdbcType=VARCHAR},
       tutor_id = #{record.tutorId,jdbcType=BIGINT},
       created = #{record.created,jdbcType=TIMESTAMP},
       expired = #{record.expired,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=TINYINT},
-      desc = #{record.desc,jdbcType=LONGVARCHAR}
+      project_desc = #{record.projectDesc,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -232,7 +232,7 @@
   <update id="updateByExample" parameterType="map" >
     update pms_project
     set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
+      project_name = #{record.projectName,jdbcType=VARCHAR},
       tutor_id = #{record.tutorId,jdbcType=BIGINT},
       created = #{record.created,jdbcType=TIMESTAMP},
       expired = #{record.expired,jdbcType=TIMESTAMP},
@@ -244,8 +244,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.pms.pojo.PmsProject" >
     update pms_project
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="projectName != null" >
+        project_name = #{projectName,jdbcType=VARCHAR},
       </if>
       <if test="tutorId != null" >
         tutor_id = #{tutorId,jdbcType=BIGINT},
@@ -259,25 +259,25 @@
       <if test="status != null" >
         status = #{status,jdbcType=TINYINT},
       </if>
-      <if test="desc != null" >
-        desc = #{desc,jdbcType=LONGVARCHAR},
+      <if test="projectDesc != null" >
+        project_desc = #{projectDesc,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pms.pojo.PmsProject" >
     update pms_project
-    set name = #{name,jdbcType=VARCHAR},
+    set project_name = #{projectName,jdbcType=VARCHAR},
       tutor_id = #{tutorId,jdbcType=BIGINT},
       created = #{created,jdbcType=TIMESTAMP},
       expired = #{expired,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=TINYINT},
-      desc = #{desc,jdbcType=LONGVARCHAR}
+      project_desc = #{projectDesc,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pms.pojo.PmsProject" >
     update pms_project
-    set name = #{name,jdbcType=VARCHAR},
+    set project_name = #{projectName,jdbcType=VARCHAR},
       tutor_id = #{tutorId,jdbcType=BIGINT},
       created = #{created,jdbcType=TIMESTAMP},
       expired = #{expired,jdbcType=TIMESTAMP},

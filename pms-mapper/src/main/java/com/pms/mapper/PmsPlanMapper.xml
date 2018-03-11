@@ -11,7 +11,7 @@
     <result column="expired" property="expired" jdbcType="TIMESTAMP" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.pms.pojo.PmsPlan" extends="BaseResultMap" >
-    <result column="desc" property="desc" jdbcType="LONGVARCHAR" />
+    <result column="plan_desc" property="planDesc" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -75,7 +75,7 @@
     id, title, stu_id, project_id, status, created, expired
   </sql>
   <sql id="Blob_Column_List" >
-    desc
+    plan_desc
   </sql>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pms.pojo.PmsPlanExample" >
     select
@@ -128,10 +128,10 @@
   <insert id="insert" parameterType="com.pms.pojo.PmsPlan" >
     insert into pms_plan (id, title, stu_id, 
       project_id, status, created, 
-      expired, desc)
+      expired, plan_desc)
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{stuId,jdbcType=BIGINT}, 
       #{projectId,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, #{created,jdbcType=TIMESTAMP}, 
-      #{expired,jdbcType=TIMESTAMP}, #{desc,jdbcType=LONGVARCHAR})
+      #{expired,jdbcType=TIMESTAMP}, #{planDesc,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pms.pojo.PmsPlan" >
     insert into pms_plan
@@ -157,8 +157,8 @@
       <if test="expired != null" >
         expired,
       </if>
-      <if test="desc != null" >
-        desc,
+      <if test="planDesc != null" >
+        plan_desc,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -183,8 +183,8 @@
       <if test="expired != null" >
         #{expired,jdbcType=TIMESTAMP},
       </if>
-      <if test="desc != null" >
-        #{desc,jdbcType=LONGVARCHAR},
+      <if test="planDesc != null" >
+        #{planDesc,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -218,8 +218,8 @@
       <if test="record.expired != null" >
         expired = #{record.expired,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.desc != null" >
-        desc = #{record.desc,jdbcType=LONGVARCHAR},
+      <if test="record.planDesc != null" >
+        plan_desc = #{record.planDesc,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -235,7 +235,7 @@
       status = #{record.status,jdbcType=TINYINT},
       created = #{record.created,jdbcType=TIMESTAMP},
       expired = #{record.expired,jdbcType=TIMESTAMP},
-      desc = #{record.desc,jdbcType=LONGVARCHAR}
+      plan_desc = #{record.planDesc,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -274,8 +274,8 @@
       <if test="expired != null" >
         expired = #{expired,jdbcType=TIMESTAMP},
       </if>
-      <if test="desc != null" >
-        desc = #{desc,jdbcType=LONGVARCHAR},
+      <if test="planDesc != null" >
+        plan_desc = #{planDesc,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -288,7 +288,7 @@
       status = #{status,jdbcType=TINYINT},
       created = #{created,jdbcType=TIMESTAMP},
       expired = #{expired,jdbcType=TIMESTAMP},
-      desc = #{desc,jdbcType=LONGVARCHAR}
+      plan_desc = #{planDesc,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pms.pojo.PmsPlan" >

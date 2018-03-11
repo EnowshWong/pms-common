@@ -17,7 +17,7 @@ public class PmsPlan {
 
     private Date expired;
 
-    private String desc;
+    private String planDesc;
 
     public Long getId() {
         return id;
@@ -75,11 +75,11 @@ public class PmsPlan {
         this.expired = expired;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getPlanDesc() {
+        return planDesc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setPlanDesc(String planDesc) {
+        this.planDesc = planDesc == null ? null : planDesc.trim();
     }
 }

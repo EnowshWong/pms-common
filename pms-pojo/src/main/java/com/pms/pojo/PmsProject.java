@@ -5,7 +5,7 @@ import java.util.Date;
 public class PmsProject {
     private Long id;
 
-    private String name;
+    private String projectName;
 
     private Long tutorId;
 
@@ -15,7 +15,7 @@ public class PmsProject {
 
     private Byte status;
 
-    private String desc;
+    private String projectDesc;
 
     public Long getId() {
         return id;
@@ -25,12 +25,12 @@ public class PmsProject {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setProjectName(String projectName) {
+        this.projectName = projectName == null ? null : projectName.trim();
     }
 
     public Long getTutorId() {
@@ -65,11 +65,11 @@ public class PmsProject {
         this.status = status;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getProjectDesc() {
+        return projectDesc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setProjectDesc(String projectDesc) {
+        this.projectDesc = projectDesc == null ? null : projectDesc.trim();
     }
 }
