@@ -63,4 +63,16 @@ public class UserServiceImpl implements UserService {
         CookieUtils.setCookie(request,response,USER_COOKIE,username);
         return PmsResult.ok(list.get(0));
     }
+
+    @Override
+    public PmsResult findUserByUsername(String username) {
+        PmsUserExample example=new PmsUserExample();
+        PmsUserExample.Criteria criteria=example.createCriteria();
+        criteria.andUsernameEqualTo(username);
+        List<PmsUser> list = pmsUserMapper.selectByExample(example);
+        if (list==null||list.size()==0){
+            return PmsResult.build(400,"此用户不存在");
+        }
+        return PmsResult.ok(list.get(0));
+    }
 }

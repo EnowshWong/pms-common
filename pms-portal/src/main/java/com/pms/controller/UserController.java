@@ -4,6 +4,7 @@ import com.pms.pojo.PmsUser;
 import com.pms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,19 +41,29 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/login",method = RequestMethod.POST)
-    @ResponseBody
-    public PmsResult login(String username, String password, HttpServletRequest request, HttpServletResponse response){
-        try{
-            PmsResult pmsResult=userService.login(username,password,request,response);
-            return pmsResult;
-        }catch (Exception e){
-            return PmsResult.build(400,ExceptionUtil.getStackTrace(e));
+    public String login(String username, String password, HttpServletRequest request, HttpServletResponse response, Model model) {
+        PmsResult pmsResult = userService.login(username, password, request, response);
+        PmsUser pmsUser = (PmsUser) pmsResult.getData();
+        if (pmsResult.getStatus() == 200) {
+            if (pmsUser.getIdentity() == 1)
+                return "succeessSu";
+            else return "successStu";
+        }
+        else {
+            model.addAttribute("error","用户名或密码错误");
+            return "error";
         }
     }
 
     @RequestMapping("/user/showLoginPage")
     public String showLoginPage(){
-        return "";
+        return "login";
     }
 
+    @RequestMapping("/user/query")
+    @ResponseBody
+    public PmsResult findUserByUsername(String username){
+        PmsResult userByUsername = userService.findUserByUsername(username);
+        return userByUsername;
+    }
 }

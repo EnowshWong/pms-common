@@ -9,6 +9,8 @@ public class PmsUser {
 
     private String password;
 
+    private String realname;
+
     private Integer identity;
 
     private String phone;
@@ -41,6 +43,14 @@ public class PmsUser {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname == null ? null : realname.trim();
     }
 
     public Integer getIdentity() {

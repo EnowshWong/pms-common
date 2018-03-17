@@ -46,6 +46,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>pms-portal</servlet-name>
-    <url-pattern>/*</url-pattern>
+    <!--url-pattern配置为/的时候无法访问静态资源，可以在springmvc.xml配置resource标签,或者也可以配置-->
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
 </web-app>

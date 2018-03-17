@@ -9,27 +9,26 @@
 
     <context:component-scan base-package="com.pms.controller" />
     <mvc:annotation-driven />
-    <mvc:default-servlet-handler/>
     <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/" />
-        <!--<property name="suffix" value=".jsp" />-->
+        <property name="suffix" value=".jsp" />
     </bean>
-    <!--&lt;!&ndash;配置拦截器&ndash;&gt;-->
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--&lt;!&ndash;被拦截的url&ndash;&gt;-->
-            <!--<mvc:mapping path="/plan/**"/>-->
-            <!--<mvc:mapping path="/project/**"/>-->
-            <!--&lt;!&ndash;指定拦截器bean&ndash;&gt;-->
-            <!--<bean class="com.pms.interceptor.LoginInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
-    <!--&lt;!&ndash;配置静态资源映射器&ndash;&gt;-->
-    <!--<mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>-->
-    <!--<mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>-->
-    <!--<mvc:resources mapping="/img/**" location="/WEB-INF/img/"/>-->
-    <!--<mvc:resources mapping="/fonts/**" location="/WEB-INF/fonts/"/>-->
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--被拦截的url-->
+            <mvc:mapping path="/plan/**"/>
+            <mvc:mapping path="/project/**"/>
+            <!--指定拦截器bean-->
+            <bean class="com.pms.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!--配置静态资源映射器-->
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/fonts/**" location="/fonts/"/>
 
     <!--&lt;!&ndash; 定义文件上传解析器 &ndash;&gt;-->
     <!--<bean id="multipartResolver"-->
