@@ -2,9 +2,12 @@ package com.pms.controller;
 
 import com.pms.pojo.PmsUser;
 import com.pms.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,19 +43,11 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/user/login",method = RequestMethod.POST)
-    public String login(String username, String password, HttpServletRequest request, HttpServletResponse response, Model model) {
-        PmsResult pmsResult = userService.login(username, password, request, response);
-        PmsUser pmsUser = (PmsUser) pmsResult.getData();
-        if (pmsResult.getStatus() == 200) {
-            if (pmsUser.getIdentity() == 1)
-                return "succeessSu";
-            else return "successStu";
-        }
-        else {
-            model.addAttribute("error","用户名或密码错误");
-            return "error";
-        }
+    @RequestMapping(value = "/user/login")
+    @ResponseBody
+    public PmsResult login(String username, String password, HttpServletRequest request, HttpServletResponse response, Integer identity) {
+        PmsResult pmsResult = userService.login(username, password, request, response,identity);
+        return pmsResult;
     }
 
     @RequestMapping("/user/showLoginPage")
@@ -65,5 +60,41 @@ public class UserController {
     public PmsResult findUserByUsername(String username){
         PmsResult userByUsername = userService.findUserByUsername(username);
         return userByUsername;
+    }
+
+    @RequestMapping("/user/postGraduate")
+    public String showGraduatePage(){
+        return "postGraduate";
+    }
+
+    @RequestMapping("/user/supervisor")
+    public String showSupervisorPage(){
+        return "supervisor";
+    }
+    @RequestMapping("/user/check/{param}/{type}")
+    @ResponseBody
+    public Object checkDataInfo(@PathVariable String param, @PathVariable Integer type, String callback){
+        if (callback==null|| StringUtils.isBlank(callback)) {
+            //传入参数非空判断
+            if (StringUtils.isBlank(param) || type == null || (type != 1 && type != 2 && type != 3))
+                return PmsResult.build(400, "传入参数有空值或者不合法值");
+            PmsResult pmsResult= userService.checkDataInfo(param, type);
+            return pmsResult;
+        }
+        else {
+            PmsResult result=null;
+            MappingJacksonValue mappingJacksonValue=null;
+            //传入参数非空判断
+            if (StringUtils.isBlank(param) || type == null || (type != 1 && type != 2 && type != 3)) {
+                result = PmsResult.build(400, "传入参数有空值或者不合法值");
+                mappingJacksonValue=new MappingJacksonValue(result);
+                mappingJacksonValue.setJsonpFunction(callback);
+                return mappingJacksonValue;
+            }
+            result=userService.checkDataInfo(param,type);
+            mappingJacksonValue=new MappingJacksonValue(result);
+            mappingJacksonValue.setJsonpFunction(callback);
+            return mappingJacksonValue;
+        }
     }
 }

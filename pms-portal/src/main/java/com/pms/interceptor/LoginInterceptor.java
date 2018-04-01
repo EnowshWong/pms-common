@@ -23,20 +23,20 @@ import javax.servlet.http.HttpServletResponse;
  *   *
  **/
 public class LoginInterceptor implements HandlerInterceptor {
-    private String LOGIN_PAGE_URL="/user/showLoginPage";
+    private String LOGIN_PAGE_URL="/";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //从cookie中去用户信息
-        String username= CookieUtils.getCookieValue(request, "USER_COOKIE");
+            String pmsUser= CookieUtils.getCookieValue(request, "USER_COOKIE");
         //判断用户名是否存在
         //不存在，则跳转到登陆页面，并且把拦截的url传递给登陆页面，返回false
-        if (username==null|| StringUtils.isBlank(username)){
+        if (pmsUser==null){
             response.sendRedirect(LOGIN_PAGE_URL);
             return false;
         }
         //如果存在，则放行,并向前端传递username参数在前端显示
-        request.setAttribute("username",username);
+        request.setAttribute("user",pmsUser);
         return true;
     }
 

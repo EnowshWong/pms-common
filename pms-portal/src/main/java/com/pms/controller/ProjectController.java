@@ -1,10 +1,12 @@
 package com.pms.controller;
 
+import com.pms.pojo.PageBean;
 import com.pms.pojo.PmsProject;
 import com.pms.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -64,4 +66,12 @@ public class ProjectController {
         PmsResult pmsResult = projectService.deleteProject(id);
         return pmsResult;
     }
+
+    @RequestMapping("/project/show")
+    public String showProject(@RequestParam(value="currPage",defaultValue="1")int currPage,Model model){
+        PageBean<PmsProject> pageBean = projectService.findByPage(currPage);
+        model.addAttribute("page",pageBean);
+        return "supervisor_proAdmin";
+    }
+
 }

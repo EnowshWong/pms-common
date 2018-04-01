@@ -16,12 +16,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
 <link href="/css/snow.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!-- //Custom Theme files -->
-<!-- web font -->
-<!--<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
--->
-<!-- //web font -->
+	<script src="/js/jquery-1.8.2.min.js"></script>
+
 </head>
 <body>
 <div class="snow-container">
@@ -41,29 +37,101 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--form-stars-here-->
 		<div class="form-w3-agile">
 			<h2 class="sub-agileits-w3layouts">注册</h2>
-			<form action="index.html" target="_self" method="post">
-					<input type="text" name="Username" placeholder="用户" required="" />
-					<input type="text" name="Telephpne" placeholder="手机号" required="" />
-					<input type="text" name="mail" placeholder="邮箱" />
-					<input type="password" name="Password" placeholder="密码" required="" />
-					<input type="password" name="Password" placeholder="确认密码" required="" />
-					
+			<form id="personRegForm" target="_self" method="post" onsubmit="return false;">
+					<input type="text" name="username" id="regName" placeholder="用户名" required="" />
+					<input type="password" name="password" id="pwd" placeholder="密码" required="" />
+					<input type="password" name="repassword" id="pwdRepeat" placeholder="确认密码" required="" />
+					<input type="text" name="phone" id="phone" placeholder="手机号" required="" />
+					<input type="text" name="email" placeholder="邮箱" />
+				<%--这里做个单选按钮，附加个参数identity:1、导师 2、研究生 3、管理员--%>
 					<input type="text" name="identity" placeholder="您的身份（研究生，导师，管理员）" required="" />
 				<div class="submit-w3l" >
-					<div style="visibility: hidden;">
-						<form action="supervisor.jsp" target="_blank"><input type="submit" value="登录"/></form>
-					</div>
-					<form action="index.html" target="_self"><input type="submit" value="登录"/></form>
+					<input type="button" id="registsubmit" value="注册" onclick="REGISTER.reg();"/>
 				</div>
 			</form>
 		</div>
 		</div>
-<!--//form-ends-here-->
-<!-- copyright -->
-	<div class="copyright w3-agile">
-	</div>
-	<!-- //copyright --> 
-	<script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
 
+<script type="text/javascript">
+    var REGISTER={ //相当于一个类
+        param:{
+            //单点登录系统的url,当前系统的根路径
+            surl:""
+        },
+        inputcheck:function(){
+            //不能为空检查
+            if ($("#regName").val() == "") {
+                alert("用户名不能为空");
+                $("#regName").focus();
+                return false;
+            }
+            if ($("#pwd").val() == "") {
+                alert("密码不能为空");
+                $("#pwd").focus();
+                return false;
+            }
+            if ($("#phone").val() == "") {
+                alert("手机号不能为空");
+                $("#phone").focus();
+                return false;
+            }
+            //密码检查
+            if ($("#pwd").val() != $("#pwdRepeat").val()) {
+                alert("确认密码和密码不一致，请重新输入！");
+                $("#pwdRepeat").select();
+                $("#pwdRepeat").focus();
+                return false;
+            }
+            return true;
+        },
+        beforeSubmit:function() {
+            //检查用户是否已经被占用
+            $.ajax({
+                //这里的url后面加入一个随机参数是为了防止浏览器get缓存
+                url : REGISTER.param.surl + "/user/check/"+escape($("#regName").val())+"/1?r=" + Math.random(),
+                success : function(data) {
+                    if (data.data) {
+                        //检查手机号是否存在
+                        $.ajax({
+                            url : REGISTER.param.surl + "/user/check/"+$("#phone").val()+"/2?r=" + Math.random(),
+                            success : function(data) {
+                                if (data.data) {
+                                    REGISTER.doSubmit();
+                                } else {
+                                    alert("此手机号已经被注册！");
+                                    $("#phone").select();
+                                }
+                            }
+                        });
+                    } else {
+                        alert("此用户名已经被占用，请选择其他用户名");
+                        $("#regName").select();
+                    }
+                }
+            });
+
+        },
+        doSubmit:function() {
+            //表单序列化传给后台
+            $.post("/user/register",$("#personRegForm").serialize(), function(data){
+                if(data.status == 200){
+                    alert('用户注册成功，请登录！');
+                    REGISTER.login();
+                } else {
+                    alert("注册失败！");
+                }
+            });
+        },
+        login:function() {
+            location.href = "/";
+            return false;
+        },
+        reg:function() {
+            if (this.inputcheck()) {
+                this.beforeSubmit();
+            }
+        }
+    };
+</script>
 </body>
 </html>

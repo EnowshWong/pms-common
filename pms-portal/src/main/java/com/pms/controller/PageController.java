@@ -1,6 +1,7 @@
 package com.pms.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -26,13 +27,10 @@ public class PageController {
         return "register";
     }
 
-    @RequestMapping("/page/login/stu")
-    public String showStuLoginPage(){
-        return "login_stu";
+    @RequestMapping("/page/login")
+    public String showStuLoginPage(Integer identity, Model model){
+        model.addAttribute("identity",identity);
+        return "login";
     }
 
-    @RequestMapping("/page/login/tea")
-    public String showTeaLoginPage(){
-        return "login_tea";
-    }
 }

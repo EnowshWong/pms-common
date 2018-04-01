@@ -16,7 +16,7 @@
                 <div class="index_nav">
                     <ul>
                         <li class="cur"><a href="#">首页</a> </li>
-                        <li><a href="#">项目管理</a> </li>
+                        <li><a href="/project/show">项目管理</a> </li>
                         <li><a href="#">计划管理</a> </li>
                         <li><a href="#">总评信息</a> </li>
                     </ul>

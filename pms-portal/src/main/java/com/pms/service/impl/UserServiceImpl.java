@@ -1,5 +1,6 @@
 package com.pms.service.impl;
 
+import com.alibaba.druid.support.json.JSONUtils;
 import com.pms.mapper.PmsUserMapper;
 import com.pms.pojo.PmsUser;
 import com.pms.pojo.PmsUserExample;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import pojo.PmsResult;
 import utils.CookieUtils;
+import utils.JsonUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,7 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PmsResult login(String username, String password, HttpServletRequest request, HttpServletResponse response) {
+    public PmsResult login(String username, String password, HttpServletRequest request, HttpServletResponse response,Integer identity) {
         PmsUserExample example=new PmsUserExample();
         PmsUserExample.Criteria criteria=example.createCriteria();
         criteria.andUsernameEqualTo(username);
@@ -60,7 +62,12 @@ public class UserServiceImpl implements UserService {
         if (!pmsUser.getPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes()))){
             return PmsResult.build(400,"用户名或密码错误");
         }
-        CookieUtils.setCookie(request,response,USER_COOKIE,username);
+        //判断身份
+        if (pmsUser.getIdentity()!=identity){
+            return PmsResult.build(400,"您无访问权限");
+        }
+        pmsUser.setPassword("");
+        CookieUtils.setCookie(request,response,USER_COOKIE, JsonUtils.objectToJson(pmsUser));
         return PmsResult.ok(list.get(0));
     }
 
@@ -74,5 +81,21 @@ public class UserServiceImpl implements UserService {
             return PmsResult.build(400,"此用户不存在");
         }
         return PmsResult.ok(list.get(0));
+    }
+
+    @Override
+    public PmsResult checkDataInfo(String param, Integer type) {
+        PmsUserExample example=new PmsUserExample();
+        PmsUserExample.Criteria criteria=example.createCriteria();
+        if (type==1)
+            criteria.andUsernameEqualTo(param);
+        else if (type==2)
+            criteria.andPhoneEqualTo(param);
+        else if (type==3)
+            criteria.andEmailEqualTo(param);
+        List<PmsUser> list = pmsUserMapper.selectByExample(example);
+        if (list!=null&&list.size()>0)
+            return PmsResult.build(200,"OK",false);
+        else return PmsResult.build(200,"OK",true);
     }
 }

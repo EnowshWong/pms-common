@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  **/
 public interface UserService {
     PmsResult registerUser(PmsUser pmsUser);
-    PmsResult login(String username, String password, HttpServletRequest request, HttpServletResponse response);
+    PmsResult login(String username, String password, HttpServletRequest request, HttpServletResponse response,Integer identity);
     PmsResult findUserByUsername(String username);
+    PmsResult checkDataInfo(String param,Integer type);
 }

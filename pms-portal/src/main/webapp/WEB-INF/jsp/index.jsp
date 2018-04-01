@@ -50,11 +50,13 @@
             <!--					<a href="#" class="forgot-w3layouts">忘记密码 ?</a>-->
 
             <div class="submit-w3l">
-                <form action="/page/login/stu" target="_self">
+                <form action="/page/login" target="_self" method="post">
+                    <input type="hidden" name="identity" value="2"/>
                     <input type="submit" value="研究生登录入口"></form>
             </div>
             <div class="submit-w3l">
-                <form action="/page/login/tea" target="_self">
+                <form action="/page/login" target="_self" method="post">
+                    <input type="hidden" name="identity" value="1"/>
                     <input type="submit" value="导师登录入口"></form>
             </div>
             <div class="submit-w3l">

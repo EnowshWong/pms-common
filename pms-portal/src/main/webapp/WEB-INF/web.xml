@@ -47,6 +47,8 @@
   <servlet-mapping>
     <servlet-name>pms-portal</servlet-name>
     <!--url-pattern配置为/的时候无法访问静态资源，可以在springmvc.xml配置resource标签,或者也可以配置-->
+    <!--配置为这样会拦截所有的静态资源-->
+    <!--url配置为/*无法访问动态资源，比如controller-->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 </web-app>

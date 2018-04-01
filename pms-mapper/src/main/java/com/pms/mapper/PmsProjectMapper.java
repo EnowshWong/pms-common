@@ -5,6 +5,7 @@ import com.pms.pojo.PmsProjectExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PmsProjectMapper {
     int countByExample(PmsProjectExample example);
@@ -34,4 +35,6 @@ public interface PmsProjectMapper {
     int updateByPrimaryKeyWithBLOBs(PmsProject record);
 
     int updateByPrimaryKey(PmsProject record);
+
+    List<PmsProject> findByPage(Map<String,Object> map);
 }

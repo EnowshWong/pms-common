@@ -1,5 +1,6 @@
 package com.pms.service;
 
+import com.pms.pojo.PageBean;
 import com.pms.pojo.PmsProject;
 import pojo.EasyUIResult;
 import pojo.PmsResult;
@@ -19,4 +20,5 @@ public interface ProjectService {
     EasyUIResult getProjectList(int page,int rows,long tutorId);
     PmsResult updateProject(PmsProject pmsProject);
     PmsResult deleteProject(long id);
+    PageBean<PmsProject> findByPage(int currPage);
 }

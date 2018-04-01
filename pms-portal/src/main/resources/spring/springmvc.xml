@@ -18,8 +18,8 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <!--被拦截的url-->
-            <mvc:mapping path="/plan/**"/>
-            <mvc:mapping path="/project/**"/>
+            <mvc:mapping path="/plan"/>
+            <mvc:mapping path="/project"/>
             <!--指定拦截器bean-->
             <bean class="com.pms.interceptor.LoginInterceptor"/>
         </mvc:interceptor>

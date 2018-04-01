@@ -28,4 +28,5 @@ public interface PmsUserMapper {
     int updateByPrimaryKeySelective(PmsUser record);
 
     int updateByPrimaryKey(PmsUser record);
+
 }
